@@ -1,0 +1,24 @@
+PODS:
+  - Eureka (5.3.6)
+  - FSCalendar (2.8.4)
+  - SwipeCellKit (2.7.1)
+
+DEPENDENCIES:
+  - Eureka
+  - FSCalendar
+  - SwipeCellKit
+
+SPEC REPOS:
+  trunk:
+    - Eureka
+    - FSCalendar
+    - SwipeCellKit
+
+SPEC CHECKSUMS:
+  Eureka: 28ad9dec6286cd7cd601fdf8e8df39bb7356a8f4
+  FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
+
+PODFILE CHECKSUM: 7d4380cf80a27199e9ef5f7f0155214e9c416481
+
+COCOAPODS: 1.11.3
