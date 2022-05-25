@@ -31,9 +31,12 @@
 		CD2B71D8282F5712005FA47B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD2B71D7282F5712005FA47B /* LaunchScreen.storyboard */; };
 		CDA09C3A2831282E0096A8DC /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA09C392831282E0096A8DC /* NewViewController.swift */; };
 		CDA09C3C28313C9E0096A8DC /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA09C3B28313C9E0096A8DC /* FloatingButton.swift */; };
-		CDA09C3E2831576C0096A8DC /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA09C3D2831576C0096A8DC /* EditViewModel.swift */; };
 		CDE2C0FB2833CE3C00CAA1A5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CDE2C0FA2833CE3C00CAA1A5 /* Realm */; };
 		CDE2C0FD2833CE3C00CAA1A5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDE2C0FC2833CE3C00CAA1A5 /* RealmSwift */; };
+		CDE2C0FF2836180800CAA1A5 /* VideoMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2C0FE2836180800CAA1A5 /* VideoMenu.swift */; };
+		CDF66E1D2837BAAD00E89CA8 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF66E1B2837BAAD00E89CA8 /* ThumbnailCell.swift */; };
+		CDF66E1E2837BAAD00E89CA8 /* ThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDF66E1C2837BAAD00E89CA8 /* ThumbnailCell.xib */; };
+		CDF66E202838FADB00E89CA8 /* EditVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF66E1F2838FADB00E89CA8 /* EditVideoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +67,10 @@
 		CD2B71D7282F5712005FA47B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDA09C392831282E0096A8DC /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		CDA09C3B28313C9E0096A8DC /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
-		CDA09C3D2831576C0096A8DC /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
+		CDE2C0FE2836180800CAA1A5 /* VideoMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMenu.swift; sourceTree = "<group>"; };
+		CDF66E1B2837BAAD00E89CA8 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
+		CDF66E1C2837BAAD00E89CA8 /* ThumbnailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThumbnailCell.xib; sourceTree = "<group>"; };
+		CDF66E1F2838FADB00E89CA8 /* EditVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVideoViewController.swift; sourceTree = "<group>"; };
 		EB0FE9D3B513B10237742734 /* Pods-ExerciseLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExerciseLog.debug.xcconfig"; path = "Target Support Files/Pods-ExerciseLog/Pods-ExerciseLog.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,7 +129,6 @@
 			children = (
 				CD2B719628280C82005FA47B /* AppDelegate.swift */,
 				CD2B719828280C82005FA47B /* SceneDelegate.swift */,
-				CDA09C3F283157720096A8DC /* ViewModel */,
 				CD2B71AD2828FE5B005FA47B /* Controller */,
 				CD2B71AE2828FE78005FA47B /* Views */,
 				CD2B71AC2828FE47005FA47B /* Model */,
@@ -140,6 +145,7 @@
 				CD2B71C5282B8270005FA47B /* VideoModel.swift */,
 				CD2B71BF282A5081005FA47B /* Workout.swift */,
 				CD2B71D3282E4D0C005FA47B /* WorkoutMenu.swift */,
+				CDE2C0FE2836180800CAA1A5 /* VideoMenu.swift */,
 				CD2B71C3282B7CB6005FA47B /* VideoManager.swift */,
 				CD2B71C7282B83C8005FA47B /* VideoData.swift */,
 				CD2B71CB282CEE9E005FA47B /* Response.swift */,
@@ -159,6 +165,7 @@
 				CD2B71C9282B88C8005FA47B /* VideoViewController.swift */,
 				CD2B71D5282F522D005FA47B /* SwipeTableViewController.swift */,
 				CDA09C392831282E0096A8DC /* NewViewController.swift */,
+				CDF66E1F2838FADB00E89CA8 /* EditVideoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -169,16 +176,10 @@
 				CD2B71D7282F5712005FA47B /* LaunchScreen.storyboard */,
 				CD2B719C28280C82005FA47B /* Main.storyboard */,
 				CD2B71CD282D5378005FA47B /* VideoTableViewCell.swift */,
+				CDF66E1B2837BAAD00E89CA8 /* ThumbnailCell.swift */,
+				CDF66E1C2837BAAD00E89CA8 /* ThumbnailCell.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		CDA09C3F283157720096A8DC /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CDA09C3D2831576C0096A8DC /* EditViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +253,7 @@
 				CD2B71D8282F5712005FA47B /* LaunchScreen.storyboard in Resources */,
 				CD2B71A028280C85005FA47B /* Assets.xcassets in Resources */,
 				CD2B719E28280C82005FA47B /* Main.storyboard in Resources */,
+				CDF66E1E2837BAAD00E89CA8 /* ThumbnailCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,15 +306,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDA09C3E2831576C0096A8DC /* EditViewModel.swift in Sources */,
 				CD2B71BA2829FD89005FA47B /* CalendarViewController.swift in Sources */,
 				CD2B719B28280C82005FA47B /* ViewController.swift in Sources */,
+				CDE2C0FF2836180800CAA1A5 /* VideoMenu.swift in Sources */,
 				CD2B71B62829FC15005FA47B /* TabViewController.swift in Sources */,
 				CD2B71C0282A5081005FA47B /* Workout.swift in Sources */,
 				CDA09C3C28313C9E0096A8DC /* FloatingButton.swift in Sources */,
 				CD2B71CA282B88C8005FA47B /* VideoViewController.swift in Sources */,
 				CD2B71CC282CEE9E005FA47B /* Response.swift in Sources */,
 				CD2B71D0282E012B005FA47B /* Constants.swift in Sources */,
+				CDF66E1D2837BAAD00E89CA8 /* ThumbnailCell.swift in Sources */,
+				CDF66E202838FADB00E89CA8 /* EditVideoViewController.swift in Sources */,
 				CD2B71D6282F522D005FA47B /* SwipeTableViewController.swift in Sources */,
 				CD2B719728280C82005FA47B /* AppDelegate.swift in Sources */,
 				CD2B719928280C82005FA47B /* SceneDelegate.swift in Sources */,

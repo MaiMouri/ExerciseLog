@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Body.png",
+      "filename" : "Body-min.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Body.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

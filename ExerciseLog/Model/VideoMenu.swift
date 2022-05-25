@@ -1,18 +1,20 @@
 //
-//  Workout.swift
+//  VideoMenu.swift
 //  ExerciseLog
 //
-//  Created by Mai Mouri on 2022/05/10.
+//  Created by Mai Mouri on 2022/05/19.
 //
 
 import Foundation
 import RealmSwift
 
-class Workout: Object {
+class VideoMenu: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var duration: Int = 0
-    @objc dynamic var quads: Int = 0
-
+    @objc dynamic var videoId: String = ""
+    @objc dynamic var thumbnail: String = ""
+    @objc dynamic var durationString: String = ""
+    
     @objc dynamic var adductor: Int = 0
     @objc dynamic var quadsriceps: Int = 0
     @objc dynamic var trochantor: Int = 0
@@ -23,10 +25,12 @@ class Workout: Object {
     
     @objc dynamic var rectus: Int = 0
     @objc dynamic var obliques: Int = 0
+    
     @objc dynamic var back: Int = 0
     @objc dynamic var hips: Int = 0
     @objc dynamic var chest: Int = 0
     
-    @objc dynamic var dateCreated: Date?
+    override static func primaryKey() -> String? {
+        return "videoId"
+    }
 }
-

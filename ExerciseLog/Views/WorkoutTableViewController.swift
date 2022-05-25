@@ -147,6 +147,15 @@ class WorkoutTableViewController:  SwipeTableViewController {
                 workout.duration = workoutMenuItem.duration
                 workout.obliques = workoutMenuItem.obliques
                 workout.quads = workoutMenuItem.quads
+                workout.chest = workoutMenuItem.chest
+                workout.back = workoutMenuItem.back
+                workout.rectus = workoutMenuItem.rectus
+                workout.biceps = workoutMenuItem.biceps
+                workout.triceps = workoutMenuItem.triceps
+                workout.quadsriceps = workoutMenuItem.quadsriceps
+                workout.adductor = workoutMenuItem.adductor
+                workout.trochantor = workoutMenuItem.trochantor
+                workout.calves = workoutMenuItem.calves
                 workout.dateCreated = Date()
                 //                    self.save(workout: workout)
                 do {
@@ -196,21 +205,6 @@ class WorkoutTableViewController:  SwipeTableViewController {
         }
     }
  
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
     
     /*
      // MARK: - Navigation

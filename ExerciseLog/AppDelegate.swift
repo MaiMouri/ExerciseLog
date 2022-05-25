@@ -12,15 +12,26 @@ import RealmSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
+    let version:UInt64 = 7
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
+        let config = Realm.Configuration(
+                  // スキーマバージョン設定
+                  schemaVersion: version,
+                  //実際のマイグレーション処理　古いスキーマバージョンのRealmを開こうとすると自動的にマイグレーションが実行
+                  migrationBlock: { migration, oldSchemaVersion in
+                    // 初めてのマイグレーションの場合、oldSchemaVersionは0
+                      if (oldSchemaVersion < self.version) {
+                      // 変更点を自動的に認識しスキーマをアップデートする
+                    }
+                  })
+
+        Realm.Configuration.defaultConfiguration = config
         do {
             let realm = try Realm()
-//            print(realm)
+            print(realm)
             
         } catch {
             print("Error initializing new Realm,\(error)")

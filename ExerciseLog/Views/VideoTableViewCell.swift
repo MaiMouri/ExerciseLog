@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class VideoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lengthLabel: UILabel!
+    
+    let realm = try! Realm()
     
     var video: VideoModel?
     
@@ -22,8 +25,7 @@ class VideoTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+
     }
     
     
@@ -35,33 +37,32 @@ class VideoTableViewCell: UITableViewCell {
             return
         }
         
-        //        Set the title
+        // Set the title
         self.titleLabel.text = video?.title
+
         
-        
-        
-        //        Set the thumbnail
+        // Set the thumbnail
         guard self.video!.thumbnail != "" else {
             return
         }
         
-        //        Download the thumbnail data
+        // Download the thumbnail data
         let url = URL(string: self.video!.thumbnail)
         
-        //        Get the shared URL Session object
+        // Get the shared URL Session object
         let session = URLSession.shared
         
-        //        Create a data task
+        // Create a data task
         let dataTask = session.dataTask(with: url!) { (data, response, error) in
             
             if error == nil && data != nil {
                 
-                //                Check the
+                // Check the URL
                 if url!.absoluteString != self.video!.thumbnail {
                     return
                 }
                 
-                //                Create image
+                // Create image
                 let image = UIImage(data: data!)
                 
                 DispatchQueue.main.async {
@@ -87,17 +88,15 @@ class VideoTableViewCell: UITableViewCell {
             do {
                 let decoder = JSONDecoder()
                 let decodedData = try decoder.decode(VideoData.self, from: data!)
-                //                get duration
                 let duration = decodedData.items[0].contentDetails.duration
                 
                 DispatchQueue.main.async {
                     self.lengthLabel.text = self.durationFormatter(duration)
                     self.video?.duration = self.durationFormatter(duration)
-//                    print(self.video?.duration)
                 }
                 
             } catch {
-                print("Error setting length decoding, \(error)")
+                print("Error 'setLength' setting length decoding, \(error)")
             }
         }
         task.resume()
@@ -128,4 +127,6 @@ class VideoTableViewCell: UITableViewCell {
             return "NO"
         }
     }
+    
+    
 }

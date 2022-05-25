@@ -6,24 +6,55 @@
 //
 
 import UIKit
+import Realm
+import RealmSwift
 
 class VideoTableViewController: UITableViewController, VideoManagerDelegate {
-    func videosFetched(_ videos: [VideoModel]) {
-        self.videos = videos
-        print("fetched")
-        tableView.reloadData()
-    }
-    
     
     var videos = [VideoModel]()
     var videoManager = VideoManager()
+    
+    let realm = try! Realm()
+    
+    let videoTableViewCell = VideoTableViewCell()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         videoManager.delegate = self
         videoManager.fetchVideoList()
+        //        loadVideoMenu()
     }
+    
+    func videosFetched(_ videos: [VideoModel]) {
+        self.videos = videos
+        print("YouTube PlayList fetched")
+        tableView.reloadData()
+    }
+    
+    // MARK: - Data Manipulation Methods
+    func save(videoMenu: VideoMenu) {
+        do {
+            try realm.write {
+                if realm.object(ofType: VideoMenu.self, forPrimaryKey: videoMenu.videoId) == nil {
+                    realm.add(videoMenu)
+                }
+            }
+        } catch {
+            print("Error saving workout menu, \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    //        func loadVideoMenu() {
+    //
+    //            videoMenu = realm.objects(VideoMenu.self)
+    //            tableView.reloadData()
+    //        }
+    
+
+    
     
     // MARK: - Table view data source
     
@@ -38,84 +69,55 @@ class VideoTableViewController: UITableViewController, VideoManagerDelegate {
         
         cell.setCell(video)
         cell.setLength(video)
-//        cell.textLabel?.text = videos[indexPath.row].title
         
         return cell
     }
     
+    
     //    Mark: - Model Delegate Method
     
-    
-    func didUpdateVideo(_ videoManager: VideoManager, videos: [VideoModel]) {
-
-        DispatchQueue.main.async {
-            //            self.temperatureLabel.text = weather.temperatureString
-            //            self.conditionImageView.image = UIImage(systemName: weather.conditionName)
-            //            self.cityLabel.text = weather.cityName
-        }
-    }
+//    func didUpdateVideo(_ videoManager: VideoManager, videos: [VideoModel]) {
+//        
+//        DispatchQueue.main.async {
+//            videos.forEach { video in
+//                let newVideoMenu = VideoMenu()
+//                newVideoMenu.name = video.title
+//                
+//                newVideoMenu.videoId = video.videoId
+//                newVideoMenu.thumbnail = video.thumbnail
+//                
+//                print(newVideoMenu)
+//                
+//                self.save(videoMenu: newVideoMenu)
+//            }
+//            
+//        }
+//    }
     
     func didFailWithError(error: Error) {
         print(error)
     }
     
-    //    api
-    //https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLk2hgOOTvKIiKnNxXZD-NUwhu-kYr1FFR&key=AIzaSyBriCj7fahdJM88iibQS2Q8FSdPab0Sef0
-    
-    
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func updateVideo(_ videoManager: VideoManager, video: VideoData) {
+        
+        DispatchQueue.main.async {
+            let newVideoMenu = VideoMenu()
+            newVideoMenu.name = video.items[0].snippet.title
+            
+            let tmpDuration = video.items[0].contentDetails.duration
+            let durationString = self.videoTableViewCell.durationFormatter(tmpDuration)
+            let durationIntArray = durationString.split(separator: ":").map { Int($0) }
+            let durationInt = (durationIntArray[0] ?? 0) * 60 + (durationIntArray[1] ?? 0)
+            newVideoMenu.durationString = durationString
+            newVideoMenu.duration = durationInt
+            
+            newVideoMenu.videoId = video.items[0].id
+            newVideoMenu.thumbnail = video.items[0].snippet.thumbnails.default.url
+            
+            print(newVideoMenu)
+            
+            self.save(videoMenu: newVideoMenu)
+        }
+    }
     
 }

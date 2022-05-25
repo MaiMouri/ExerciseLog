@@ -18,7 +18,6 @@ class FloatingButton:UIButton {
         super.init(frame: frame)
         self.backgroundColor = .systemPink
         self.layer.borderColor = UIColor.black.cgColor
-        //        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         let image = UIImage(systemName: "plus",
                             withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: .medium))
         self.setImage(image, for: .normal)
