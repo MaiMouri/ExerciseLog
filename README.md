@@ -18,9 +18,6 @@
 
 <img src="https://user-images.githubusercontent.com/77220332/178102061-b02ab178-c69c-4b0f-8dde-3b5d0271187d.png" width="250" />
 
-## Demo
-
-https://user-images.githubusercontent.com/77220332/178010026-9b4bb2f0-e30d-498a-9fe8-0e8feb147bfe.mov
 
 
 ## About
