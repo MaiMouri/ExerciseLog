@@ -9,15 +9,15 @@ import youtube_ios_player_helper
 import UIKit
 import RealmSwift
 
-class VideoViewController: UIViewController {
+class VideoViewController: UIViewController, YTPlayerViewDelegate {
     
     let realm = try! Realm()
     var videoMenu : Results <VideoMenu>?
     
-    //    var videoManager = VideoManager()
     var videos = [VideoModel]()
+    var playingVideo = VideoMenu()
     
-//    let floatingButton = FloatingButton()
+    var playlistId: String = ""
     
     @IBOutlet weak var playerView: YTPlayerView!
     
@@ -28,12 +28,12 @@ class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.addSubview(floatingButton)
-//        floatingButton.addTarget(self, action: #selector(didTapButton), for: .touchDown)
-        
         videoTableView.rowHeight = 80.0
         
+        playlistId = "PLk2hgOOTvKIiKnNxXZD-NUwhu-kYr1FFR"
+        
         playerView.load(withVideoId: "")
+        playerView.delegate = self
         videoTableView.dataSource = self
         videoTableView.delegate = self
         loadVideoMenu()
@@ -57,35 +57,73 @@ class VideoViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        floatingButton.frame = CGRect(
-//            x: view.frame.size.width -  70,
-//            y: view.frame.size.height - 300,
-//            width: 60,
-//            height: 60)
+
     }
     
     @IBAction func importButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "gotoNewVideo", sender: self)
+        var textField = UITextField()
+        let alert = UIAlertController(title: "playlistId", message: "Enter the Id", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default){ (action) in
+            self.playlistId = textField.text!
+            self.performSegue(withIdentifier: "gotoNewVideo", sender: self)
+        }
+        alert.addAction(
+                UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addTextField{(alertTextField) in
+            alertTextField.placeholder = "PLk2hgOOTvKIiKnNxXZD-NUwhu-kYr1FFR"
+            textField = alertTextField
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
     }
     // MARK: - Data Manipulation Methods
-    //    func save(videoMenu: VideoMenu) {
-    //        do {
-    //            try realm.write {
-    //                if realm.object(ofType: VideoMenu.self, forPrimaryKey: videoMenu.videoId) == nil {
-    //                    realm.add(videoMenu)
-    //                }
-    //            }
-    //        } catch {
-    //            print("Error saving workout menu, \(error)")
-    //        }
-    //
-    //        tableView.reloadData()
-    //    }
+        func save(workout: Workout) {
+            do {
+                try realm.write {
+                    realm.add(workout)
+
+                }
+            } catch {
+                print("Error saving workout menu, \(error)")
+            }
+    
+//            tableView.reloadData()
+        }
     
     func loadVideoMenu() {
         
         videoMenu = realm.objects(VideoMenu.self)
         videoTableView.reloadData()
+    }
+    
+    // MARK: - delegate methods
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        
+        if state == YTPlayerState.playing {
+            print(playingVideo.videoId)
+            if let video = realm.object(ofType: VideoMenu.self, forPrimaryKey: playingVideo.videoId) {
+                let workout = Workout()
+                workout.name = video.name
+                workout.duration = video.duration
+                workout.obliques = video.obliques
+//                workout.quads = video.quads
+                workout.chest = video.chest
+                workout.back = video.back
+                workout.rectus = video.rectus
+                workout.biceps = video.biceps
+                workout.triceps = video.triceps
+                workout.quadsriceps = video.quadsriceps
+                workout.adductor = video.adductor
+                workout.trochantor = video.trochantor
+                workout.calves = video.calves
+                workout.dateCreated = Date()
+                
+                self.save(workout: workout)
+            }
+
+        }
+
     }
     
     
@@ -106,8 +144,10 @@ extension VideoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedVideoId = videoMenu?[indexPath.row].videoId
-        playerView.load(withVideoId: selectedVideoId!)
+        let selctedVideo = (self.videoMenu?[indexPath.row])!
+        let selectedVideoId = selctedVideo.videoId
+        playerView.load(withVideoId: selectedVideoId)
+        playingVideo = selctedVideo
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -122,7 +162,6 @@ extension VideoViewController: UITableViewDataSource, UITableViewDelegate {
             let selectedVideo = (self.videoMenu?[indexPath.row])!
 
             self.performSegue(withIdentifier: "gotoEdit", sender: selectedVideo)
-//            self.present(editVC, animated: true, completion: nil)
             completionHandler(true)
         }
         
@@ -142,7 +181,9 @@ extension VideoViewController: UITableViewDataSource, UITableViewDelegate {
             let nav = segue.destination as! UINavigationController
             let editVC = nav.topViewController as! EditVideoViewController
             editVC.video = sender as! VideoMenu
-            
+        } else if(segue.identifier == "gotoNewVideo") {
+            let newVC = segue.destination as! VideoTableViewController
+            newVC.playlistId = self.playlistId
         }
     }
 }

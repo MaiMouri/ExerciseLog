@@ -18,11 +18,13 @@ class VideoTableViewController: UITableViewController, VideoManagerDelegate {
     
     let videoTableViewCell = VideoTableViewCell()
     
+    var playlistId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         videoManager.delegate = self
-        videoManager.fetchVideoList()
+        videoManager.fetchVideoList(with: playlistId)
         //        loadVideoMenu()
     }
     
