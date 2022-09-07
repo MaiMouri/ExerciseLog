@@ -11,14 +11,20 @@ YouTubeのプレイリストをインポートできます。（プレイリス�
 
 ### Workout Menu
 
+筋トレメニューを選択する画面です。クリックすると実行するかどうか確認のアラートが出ます。
+
 <img src="https://user-images.githubusercontent.com/77220332/178101803-3ba4d098-f589-4abb-8546-b99b94b8ad8d.png" width="250" />
 
 ### Custom Workout Menu
+
+オリジナルのトレーニングメニューを登録できます。そのトレーニングによりどの部位がどのくらいの時間（分または秒）鍛えられるかを設定します。
+こちらで登録するとWorkout Menuで選択できるようになります。
 
 <img src="https://user-images.githubusercontent.com/77220332/178101838-0903e47b-7ad6-4192-a8d2-0649074cbbb0.png" width="250" />
 
 ### YouTube Video
 
+プレイリストからインポートした動画一覧です。選択するとそのトレーニングを実行したことになり、筋トレの記録がつきます。
 
 <img src="https://user-images.githubusercontent.com/77220332/178102061-b02ab178-c69c-4b0f-8dde-3b5d0271187d.png" width="250" />
 
